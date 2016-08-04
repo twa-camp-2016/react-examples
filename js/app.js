@@ -2,11 +2,29 @@ const App=React.createClass({
 
     render:function(){
 
-            return <p>it is work</p>
+            return <div>
+                <button>预览</button>
+                <Editor/>
+                <Preview/>
+            </div>
 
     }
+});
+const Editor=React.createClass({
+    render:function(){
+        return <div>
+            Editor
+        </div>
 
+    }
+});
+const Preview=React.createClass({
+    render:function(){
+        return <div>
+            Preview
+        </div>
 
+    }
 });
 
 ReactDOM.render(<App />, document.getElementById('content'));
