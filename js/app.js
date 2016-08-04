@@ -1,21 +1,27 @@
 const App = React.createClass({
     getInitialState: function () {
         return {
-            result: "hello"
+            name:'自增',
+            result: 1
         }
     },
+    add: function () {
+        this.setState({result:this.state.result+1});
+    },
     render: function () {
-        return <div> {this.state.result}
+        return (
+        <div> {this.state.name}
+            <button onClick={this.add}>+</button>
             <div>
-                <Show outPut="world"/>
+                <Show result={this.state.result}/>
             </div>
-        </div>
+        </div>);
     }
 })
 
 const Show = React.createClass({
     render: function () {
-        return <div> {this.props.outPut}</div>
+        return <div> {this.props.result}</div>
     }
 })
 
