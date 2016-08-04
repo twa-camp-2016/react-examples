@@ -13,6 +13,11 @@ const App=React.createClass({
         elements.push(element);
         this.setState({elements})
     },
+    deleteElement:function(index){
+        const elements = this.state.elements;
+        elements.splice(index,1);
+        this.setState({elements})
+    },
     render:function(){
             const isEditor=this.state.isEditor;
             return <div>
@@ -38,12 +43,16 @@ const Editor=React.createClass({
     }
 });
 const Left=React.createClass({
+    remove:function(index){
+
+        this.props.onDelete(index);
+    },
     render:function(){
         const  elements=this.props.elements.map((element,index)=>{
             return(
                 <div key={index}>
                     <input type={element}/>
-                    <button>X</button>
+                    <button onClick={this.remove.bind(this,index)}>X</button>
                 </div>
             )
 
@@ -72,7 +81,7 @@ const Right=React.createClass({
 const Preview=React.createClass({
     render:function(){
         return <div>
-            Preview
+            preview
         </div>
 
     }
