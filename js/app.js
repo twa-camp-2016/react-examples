@@ -80,8 +80,15 @@ const Right=React.createClass({
 });
 const Preview=React.createClass({
     render:function(){
+        const  elements=this.props.elements.map((element,index)=>{
+            return(
+                <div key={index}>
+                    <input type={element}/>
+                </div>
+            )});
         return <div>
-            preview
+            {elements}
+            <button>提交</button>
         </div>
 
     }
