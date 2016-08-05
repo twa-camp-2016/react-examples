@@ -26,7 +26,7 @@ const App=React.createClass({
                 <Editor elements={this.state.elements} onAdd={this.addElements} onDelete={this.deleteElements}/>
             </div>
             <div className={isEditor?'hidden':''}>
-                <Preview/>
+                <Preview elements={this.state.elements}/>
             </div>
 
         </div>
@@ -74,8 +74,14 @@ const Right=React.createClass({
 });
 const Preview=React.createClass({
     render:function(){
+        const elements=this.props.elements.map((ele,index)=>{
+            return <div key={index}>
+                <input type={ele}/>
+            </div>
+        });
         return <div>
-            Preview
+            {elements}
+            <button>submit</button>
         </div>
     }
 });
