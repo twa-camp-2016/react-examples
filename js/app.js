@@ -18,13 +18,20 @@ const App=React.createClass({
             elements
         });
     },
+    deleteElement:function (index) {
+        const elements=this.state.elements;
+        elements.splice(index,1);
+        this.setState({
+            elements
+        });
+    },
    render:function(){
        const isEditor=this.state.isEditor;
        const elements=this.state.elements;
        return <div>
            <button onClick={this.display}>{isEditor?'预览':'编辑'}</button>
            <div className={isEditor?'':'hidden'}>
-               <Editor elements={elements} onAdd={this.addElement}/>
+               <Editor elements={elements} onAdd={this.addElement} onDelete={this.deleteElement}/>
            </div>
            <div className={isEditor?'hidden':''}>
                <Preview/>
@@ -37,18 +44,21 @@ const App=React.createClass({
 const Editor=React.createClass({
     render:function(){
         return <div>
-            <Left elements={this.props.elements}/>
+            <Left elements={this.props.elements} onDelete={this.props.onDelete}/>
             <Right onAdd={this.props.onAdd}/>
         </div>
 
     }
 });
 const Left=React.createClass({
+    remove:function (index) {
+      this.props.onDelete(index);
+    },
     render:function(){
         const elements=this.props.elements.map((ele,index)=>{
            return <div key={index}>
                <input type={ele}/>
-               <button>X</button>
+               <button onClick={this.remove.bind(this,index)}>X</button>
            </div>
         });
         return <div>
